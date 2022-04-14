@@ -1,7 +1,7 @@
 import { Route, Routes } from 'react-router-dom';
 import logo from './logo.svg';
 import './App.css';
-import Cities from './views/Cities';
+import Countries from './views/Countries';
 import Details from './views/Details';
 
 function App() {
@@ -11,8 +11,8 @@ function App() {
         <img src={logo} className="App-logo" alt="logo" />
       </header>
       <Routes>
-        <Route path="/" element={<Cities />} />
-        <Route path="details/:city" element={<Details />} />
+        <Route path="/" element={<Countries />} />
+        <Route path="details/:country" element={<Details />} />
       </Routes>
     </div>
   );
