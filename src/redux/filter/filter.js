@@ -1,6 +1,26 @@
 const SET_DATE = 'metrics-webapp/date/SET_DATE';
 const SET_VALUE = 'metrics-webapp/date/SET_VALUE';
-const defaultCountries = { date: new Date(), value: 0 };
+
+export const VALUE_LIST = [
+  'today_confirmed',
+  'today_deaths',
+  'today_new_confirmed',
+  'today_new_deaths',
+  'today_new_open_cases',
+  'today_new_recovered',
+  'today_open_cases',
+  'today_recovered',
+  'today_vs_yesterday_confirmed',
+  'today_vs_yesterday_deaths',
+  'today_vs_yesterday_open_cases',
+  'today_vs_yesterday_recovered',
+  'yesterday_confirmed',
+  'yesterday_deaths',
+  'yesterday_open_cases',
+  'yesterday_recovered',
+];
+
+const defaultCountries = { date: new Date(), value: VALUE_LIST[0] };
 export default function reducer(state = defaultCountries, action = {}) {
   switch (action.type) {
     case SET_DATE: {
@@ -19,7 +39,7 @@ export const setDate = (date = new Date()) => ({
   date,
 });
 
-export const setValue = (value = 0) => ({
+export const setValue = (value = VALUE_LIST[0]) => ({
   type: SET_VALUE,
   value,
 });

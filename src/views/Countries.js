@@ -1,9 +1,8 @@
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { VALUE_LIST } from '../redux/configureStore';
 import { getCountries } from '../redux/countries/countries';
-import { setDate, setValue } from '../redux/filter/filter';
+import { setDate, setValue, VALUE_LIST } from '../redux/filter/filter';
 
 export default function Countries() {
   const {
@@ -36,42 +35,42 @@ export default function Countries() {
       <section className="banner">
         <time className="date" dateTime={date.toISOString().substring(0, 10)}>
           <div className="val">
-            <button type="button" onClick={() => setDate(prevYear)}>{prevYear.toISOString().substring(0, 4)}</button>
+            <button type="button" onClick={() => dispatch(setDate(prevYear))}>{prevYear.toISOString().substring(0, 4)}</button>
             <span>
               {date.toISOString().substring(0, 4)}
             </span>
-            <button type="button" onClick={() => setDate(nextYear)}>{nextYear.toISOString().substring(0, 4)}</button>
+            <button type="button" onClick={() => dispatch(setDate(nextYear))}>{nextYear.toISOString().substring(0, 4)}</button>
           </div>
           <div className="val">
-            <button type="button" onClick={() => setDate(prevMonth)}>{prevMonth.toISOString().substring(5, 7)}</button>
+            <button type="button" onClick={() => dispatch(setDate(prevMonth))}>{prevMonth.toISOString().substring(5, 7)}</button>
             <span>
               {date.toISOString().substring(5, 7)}
             </span>
-            <button type="button" onClick={() => setDate(nextMonth)}>{nextMonth.toISOString().substring(5, 7)}</button>
+            <button type="button" onClick={() => dispatch(setDate(nextMonth))}>{nextMonth.toISOString().substring(5, 7)}</button>
           </div>
           <div className="val">
-            <button type="button" onClick={() => setDate(prevDay)}>{prevDay.toISOString().substring(8, 10)}</button>
+            <button type="button" onClick={() => dispatch(setDate(prevDay))}>{prevDay.toISOString().substring(8, 10)}</button>
             <span>
               {date.toISOString().substring(8, 10)}
             </span>
-            <button type="button" onClick={() => setDate(nextDay)}>{nextDay.toISOString().substring(8, 10)}</button>
+            <button type="button" onClick={() => dispatch(setDate(nextDay))}>{nextDay.toISOString().substring(8, 10)}</button>
           </div>
         </time>
         <div className="total">
           <div className="val">
-            <button type="button" onClick={() => setValue(prevValue)}>{prevValue.replace('_', ' ')}</button>
+            <button type="button" onClick={() => dispatch(setValue(prevValue))}>{prevValue.replace('_', ' ')}</button>
             <span>
               {value.replace('_', ' ')}
             </span>
-            <button type="button" onClick={() => setValue(nextValue)}>{nextValue.replace('_', ' ')}</button>
+            <button type="button" onClick={() => dispatch(setValue(nextValue))}>{nextValue.replace('_', ' ')}</button>
           </div>
           {total[value]}
         </div>
-        <button type="button" onClick={() => setDate(nextDay)}>
+        <button type="button" onClick={() => dispatch(setDate(nextDay))}>
           <img src="" alt="" />
           next
         </button>
-        <button type="button" onClick={() => setDate(prevDay)}>
+        <button type="button" onClick={() => dispatch(setDate(prevDay))}>
           <img src="" alt="" />
           prev
         </button>
