@@ -1,13 +1,15 @@
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
+import { VALUE_LIST } from '../redux/configureStore';
 import { getCountries } from '../redux/countries/countries';
+import { setDate, setValue } from '../redux/filter/filter';
 
 export default function Countries() {
-  const [date, setDate] = useState(new Date());
-  let temp;
-  // eslint-disable-next-line no-multi-assign
-  const { countries, total } = temp = useSelector((state) => state.countries);
+  const {
+    countries: { countries, total },
+    filter: { date, value },
+  } = useSelector((state) => state);
   const dispatch = useDispatch();
   useEffect(
     () => {
@@ -21,7 +23,9 @@ export default function Countries() {
   const nextMonth = new Date(new Date().setMonth(date.getMonth() + 1));
   const prevDay = new Date(new Date().setDate(date.getDate() - 1));
   const nextDay = new Date(new Date().setDate(date.getDate() + 1));
-  console.log(temp);
+  const prevValue = VALUE_LIST[
+    (VALUE_LIST.indexOf(value) - 1 + VALUE_LIST.length) % VALUE_LIST.length];
+  const nextValue = VALUE_LIST[(VALUE_LIST.indexOf(value) + 1) % VALUE_LIST.length];
   return (
     <div>
       <header className="App-header">
@@ -53,7 +57,16 @@ export default function Countries() {
             <button type="button" onClick={() => setDate(nextDay)}>{nextDay.toISOString().substring(8, 10)}</button>
           </div>
         </time>
-        <div>{total.today_new_confirmed}</div>
+        <div className="total">
+          <div className="val">
+            <button type="button" onClick={() => setValue(prevValue)}>{prevValue.replace('_', ' ')}</button>
+            <span>
+              {value.replace('_', ' ')}
+            </span>
+            <button type="button" onClick={() => setValue(nextValue)}>{nextValue.replace('_', ' ')}</button>
+          </div>
+          {total[value]}
+        </div>
         <button type="button" onClick={() => setDate(nextDay)}>
           <img src="" alt="" />
           next
@@ -66,9 +79,17 @@ export default function Countries() {
       <ul>
         {countries.map((country) => (
           <li key={country.id}>
-            <Link to={`details/${country.id}`}>{country.name}</Link>
-            {' '}
-            {country.today_new_confirmed}
+            <Link className="country card" to={`details/${country.id}`}>
+              <img src={`images/countries/${country.id}-EPS-01-0001.png`} alt="" />
+              <div className="info">
+                <h3>
+                  {country.name}
+                </h3>
+                <div className="value">
+                  {country[value]}
+                </div>
+              </div>
+            </Link>
           </li>
         ))}
       </ul>

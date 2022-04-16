@@ -27,10 +27,6 @@ export default function reducer(state = defaultCountries, action = {}) {
     case LIST_SUCCESS: {
       return action.val;
     }
-    case LIST_FAILURE: {
-      console.error(action.err);
-      return [...action.list];
-    }
     default:
       return state;
   }
