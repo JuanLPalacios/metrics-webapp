@@ -73,12 +73,10 @@ export default function Countries() {
           {format(total[value])}
         </div>
         <button className="next" type="button" onClick={() => dispatch(setDate(nextDay))}>
-          <img src="" alt="" />
-          next
+          <img src="./images/right-arrow.svg" alt="" />
         </button>
         <button className="prev" type="button" onClick={() => dispatch(setDate(prevDay))}>
-          <img src="" alt="" />
-          prev
+          <img src="./images/left-arrow.svg" alt="" />
         </button>
       </section>
       <ul>

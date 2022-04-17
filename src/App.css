@@ -47,6 +47,12 @@ ul li:nth-child(4n-2) {
   flex: 1 1 50%;
 }
 
+.prev > img,
+.next > img {
+  width: 20px;
+  filter: invert(1);
+}
+
 .info > div {
   padding: 0 10%;
   text-align: right;

@@ -28,7 +28,9 @@ export default function Details() {
   return (
     <div>
       <header className="App-header">
-        <button type="button" onClick={() => window.history.back()}>back</button>
+        <button className="prev" type="button" onClick={() => window.history.back()}>
+          <img src="./images/left-arrow.svg" alt="" />
+        </button>
         <div>
           {country.name}
         </div>
