@@ -1,3 +1,129 @@
-* {
-  box-sizing: border-box;
+svg {
+  width: 100%;
+  padding: 10px;
+  object-fit: contain;
+}
+
+ul {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  padding: 0;
+  margin: 0;
+}
+
+ul li {
+  flex: 1 1 50%;
+  padding: 10px;
+  text-align: right;
+}
+
+ul li:nth-child(4n-1),
+ul li:nth-child(4n-2) {
+  background: var(--color3);
+}
+
+.App-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 40px;
+}
+
+.banner {
+  background-image: linear-gradient(90deg, #000000c2, #0000);
+  height: 250px;
+  position: relative;
+}
+
+.info {
+  background-color: var(--color);
+  height: 200px;
+  display: flex;
+  align-items: center;
+}
+
+.info > * {
+  flex: 1 1 50%;
+}
+
+.prev > img,
+.next > img {
+  width: 20px;
+  filter: invert(1);
+}
+
+.info > div {
+  padding: 0 10%;
+  text-align: right;
+}
+
+.val {
+  width: max-content;
+  display: flex;
+  flex-direction: column;
+  font-weight: bold;
+  text-align: center;
+}
+
+.val button {
+  opacity: 0.6;
+  font-weight: normal;
+}
+
+.sel-val-name {
+  padding: 2px 10%;
+  background: var(--color3);
+}
+
+.val-num {
+  font-size: 18px;
+  font-weight: bold;
+  text-align: right;
+}
+
+.det-value {
+  display: flex;
+  padding: 25px 8%;
+  text-transform: uppercase;
+  align-items: center;
+}
+
+.det-value:nth-child(2n) {
+  background-color: var(--color3);
+}
+
+.det-value > * {
+  flex: 1 1 auto;
+}
+
+.banner .date {
+  display: flex;
+  gap: 10px;
+  font-size: 30px;
+  position: absolute;
+  top: 10px;
+  right: 10%;
+}
+
+.banner .total {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 20px;
+  position: absolute;
+  top: 90px;
+  right: 10%;
+}
+
+.banner .prev {
+  position: absolute;
+  bottom: 20px;
+  left: 10%;
+}
+
+.banner .next {
+  position: absolute;
+  bottom: 20px;
+  right: 10%;
 }

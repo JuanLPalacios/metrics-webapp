@@ -1,13 +1,31 @@
-body {
-  background: rgb(223, 87, 34);
+:root {
+  --color: rgb(230, 89, 33);
+  --color2: rgb(214, 75, 20);
+  --color3: rgb(168, 58, 14);
 }
 
-code {
-  font-family:
-    source-code-pro,
-    Menlo,
-    Monaco,
-    Consolas,
-    'Courier New',
-    monospace;
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Lato', sans-serif;
+  background: var(--color2);
+  margin: 0;
+  color: #fff;
+}
+
+button {
+  color: inherit;
+  background: transparent;
+  border: none;
+}
+
+button:active {
+  background: #fff2;
+}
+
+a {
+  color: inherit;
+  text-decoration: inherit;
 }

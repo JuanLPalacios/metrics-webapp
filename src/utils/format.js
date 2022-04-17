@@ -1,4 +1,5 @@
 export default function format(val) {
+  if (val === undefined) return '';
   let scale; let
     unit;
   if (val >= 1000000) {
