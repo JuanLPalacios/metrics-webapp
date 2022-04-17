@@ -86,7 +86,7 @@ export default function Countries() {
           <li key={country.id}>
             <Link className="country card" to={`details/${country.id}`}>
               <img src={`images/countries/${country.id}-EPS-01-0001.png`} alt="" />
-              <div className="info">
+              <div>
                 <h3>
                   {country.name}
                 </h3>

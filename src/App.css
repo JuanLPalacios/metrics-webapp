@@ -1,3 +1,9 @@
+svg {
+  width: 100%;
+  padding: 10px;
+  object-fit: contain;
+}
+
 ul {
   list-style: none;
   display: flex;
@@ -30,6 +36,22 @@ ul li:nth-child(4n-2) {
   position: relative;
 }
 
+.info {
+  background-color: var(--color);
+  height: 200px;
+  display: flex;
+  align-items: center;
+}
+
+.info > * {
+  flex: 1 1 50%;
+}
+
+.info > div {
+  padding: 0 10%;
+  text-align: right;
+}
+
 .val {
   width: max-content;
   display: flex;
@@ -41,6 +63,32 @@ ul li:nth-child(4n-2) {
 .val button {
   opacity: 0.6;
   font-weight: normal;
+}
+
+.sel-val-name {
+  padding: 2px 10%;
+  background: var(--color3);
+}
+
+.val-num {
+  font-size: 18px;
+  font-weight: bold;
+  text-align: right;
+}
+
+.det-value {
+  display: flex;
+  padding: 25px 8%;
+  text-transform: uppercase;
+  align-items: center;
+}
+
+.det-value:nth-child(2n) {
+  background-color: var(--color3);
+}
+
+.det-value > * {
+  flex: 1 1 auto;
 }
 
 .banner .date {
@@ -60,10 +108,6 @@ ul li:nth-child(4n-2) {
   position: absolute;
   top: 90px;
   right: 10%;
-}
-
-.banner .total .val {
-  width: %;
 }
 
 .banner .prev {

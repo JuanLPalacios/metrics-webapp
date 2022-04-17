@@ -25,7 +25,6 @@ export default function Details() {
     },
     [params],
   );
-  console.log(details);
   return (
     <div>
       <header className="App-header">
@@ -35,28 +34,28 @@ export default function Details() {
         </div>
         <div />
       </header>
-      <div>
+      <div className="info">
         <img src={`images/countries/${country.id}-EPS-01-0001.png`} alt="" />
-        <div className="info">
+        <div>
           <h3>
             {country.name}
           </h3>
           <div className="value">
-            {country[value]}
+            {format(country[value])}
           </div>
         </div>
       </div>
-      <div className="total">
-        {value.replace('_', ' ')}
+      <div className="sel-val-name">
+        {value.replace(/_/g, ' ')}
       </div>
       <Chart
         source={details && details.dates}
         selector={(x) => Object.values(x.countries)[0][value]}
       />
       {VALUE_LIST.map((value, i) => (
-        <div key={`val-${i}`}>
+        <div key={`val-${i}`} className="det-value">
           <div className="val-name">
-            {value.replace('_', ' ')}
+            {value.replace(/_/g, ' ')}
           </div>
           <div className="val-num">
             {details && format(details.total[value])}
