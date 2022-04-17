@@ -14,7 +14,7 @@ export default function Details() {
     filter: { date, value },
   } = useSelector((state) => state);
   const country = details
-    ? Object.keys(details.dates[date.toISOString().substring(0, 10)].countries)[0]
+    ? Object.values(details.dates[date.toISOString().substring(0, 10)].countries)[0]
     : {
       name: '',
     };
@@ -30,7 +30,10 @@ export default function Details() {
     <div>
       <header className="App-header">
         <button type="button" onClick={() => window.history.back()}>back</button>
-        {country.name}
+        <div>
+          {country.name}
+        </div>
+        <div />
       </header>
       <div>
         <img src={`images/countries/${country.id}-EPS-01-0001.png`} alt="" />

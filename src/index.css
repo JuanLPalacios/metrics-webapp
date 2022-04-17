@@ -21,7 +21,7 @@ button {
   border: none;
 }
 
-button:hover {
+button:active {
   background: #fff2;
 }
 

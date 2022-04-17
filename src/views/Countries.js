@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { getCountries } from '../redux/countries/countries';
 import { setDate, setValue, VALUE_LIST } from '../redux/filter/filter';
+import format from '../utils/format';
 
 export default function Countries() {
   const {
@@ -28,9 +29,14 @@ export default function Countries() {
   return (
     <div>
       <header className="App-header">
-        {date.toISOString().substring(0, 10)}
-        {' '}
-        stats
+        <div />
+        <div>
+          {date.toISOString().substring(0, 10)}
+          {' '}
+          stats
+
+        </div>
+        <div />
       </header>
       <section className="banner">
         <time className="date" dateTime={date.toISOString().substring(0, 10)}>
@@ -58,19 +64,19 @@ export default function Countries() {
         </time>
         <div className="total">
           <div className="val">
-            <button type="button" onClick={() => dispatch(setValue(prevValue))}>{prevValue.replace('_', ' ')}</button>
+            <button type="button" onClick={() => dispatch(setValue(prevValue))}>{prevValue.replace(/_/g, ' ')}</button>
             <span>
-              {value.replace('_', ' ')}
+              {value.replace(/_/g, ' ')}
             </span>
-            <button type="button" onClick={() => dispatch(setValue(nextValue))}>{nextValue.replace('_', ' ')}</button>
+            <button type="button" onClick={() => dispatch(setValue(nextValue))}>{nextValue.replace(/_/g, ' ')}</button>
           </div>
-          {total[value]}
+          {format(total[value])}
         </div>
-        <button type="button" onClick={() => dispatch(setDate(nextDay))}>
+        <button className="next" type="button" onClick={() => dispatch(setDate(nextDay))}>
           <img src="" alt="" />
           next
         </button>
-        <button type="button" onClick={() => dispatch(setDate(prevDay))}>
+        <button className="prev" type="button" onClick={() => dispatch(setDate(prevDay))}>
           <img src="" alt="" />
           prev
         </button>
