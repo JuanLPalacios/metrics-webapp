@@ -4,24 +4,23 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import Chart from '../components/Chart';
 import { getDetails } from '../redux/details/details';
-import { VALUE_LIST } from '../redux/filter/filter';
 import format from '../utils/format';
 
 export default function Details() {
   const params = useParams();
   const {
     details,
-    filter: { date, value },
+    filter: { value },
   } = useSelector((state) => state);
   const country = details
-    ? Object.values(details.dates[date.toISOString().substring(0, 10)].countries)[0]
+    ? details[0].country
     : {
-      name: '',
+      value: '',
     };
   const dispatch = useDispatch();
   useEffect(
     () => {
-      dispatch(getDetails(params.country, date));
+      dispatch(getDetails(params.country, value));
     },
     [params],
   );
@@ -32,7 +31,7 @@ export default function Details() {
           <img src="./images/left-arrow.svg" alt="" />
         </button>
         <div>
-          {country.name}
+          {country.value}
         </div>
         <div />
       </header>
@@ -43,7 +42,7 @@ export default function Details() {
             {country.name}
           </h3>
           <div className="value">
-            {format(country[value])}
+            {format(details ? details[0]?.value : 0)}
           </div>
         </div>
       </div>
@@ -51,16 +50,16 @@ export default function Details() {
         {value.replace(/_/g, ' ')}
       </div>
       <Chart
-        source={details && details.dates}
-        selector={(x) => Object.values(x.countries)[0][value]}
+        source={details || []}
+        selector={(x) => x.value}
       />
-      {VALUE_LIST.map((value, i) => (
+      {details && details.map((value, i) => (
         <div key={`val-${i}`} className="det-value">
           <div className="val-name">
-            {value.replace(/_/g, ' ')}
+            {value.date}
           </div>
           <div className="val-num">
-            {details && format(details.total[value])}
+            {value && format(value.value)}
           </div>
         </div>
       ))}

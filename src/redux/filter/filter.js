@@ -2,25 +2,19 @@ const SET_DATE = 'metrics-webapp/date/SET_DATE';
 const SET_VALUE = 'metrics-webapp/date/SET_VALUE';
 
 export const VALUE_LIST = [
-  'today_confirmed',
-  'today_deaths',
-  'today_new_confirmed',
-  'today_new_deaths',
-  'today_new_open_cases',
-  'today_new_recovered',
-  'today_open_cases',
-  'today_recovered',
-  'today_vs_yesterday_confirmed',
-  'today_vs_yesterday_deaths',
-  'today_vs_yesterday_open_cases',
-  'today_vs_yesterday_recovered',
-  'yesterday_confirmed',
-  'yesterday_deaths',
-  'yesterday_open_cases',
-  'yesterday_recovered',
+  'SP.POP.TOTL',
+  'SP.DYN.LE00.IN',
+  'SE.SCH.LIFE',
+  'NY.GNP.PCAP.CD',
 ];
+export const VALUE_MAP = {
+  'SP.POP.TOTL': 'Population, total',
+  'SP.DYN.LE00.IN': 'Life expectancy at birth, total (years)',
+  'SE.SCH.LIFE': 'School life expectancy, primary to tertiary, both sexes (years)',
+  'NY.GNP.PCAP.CD': 'GNI per capita, Atlas method (current US$)',
+};
 
-const defaultCountries = { date: new Date(), value: VALUE_LIST[0] };
+const defaultCountries = { date: new Date(new Date().getFullYear() - 1, 1), value: VALUE_LIST[0] };
 export default function reducer(state = defaultCountries, action = {}) {
   switch (action.type) {
     case SET_DATE: {

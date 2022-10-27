@@ -1,14 +1,15 @@
 /* eslint-disable react/no-array-index-key */
 
+import PropTypes from 'prop-types';
 import format from '../utils/format';
 
 export default function Chart(props) {
   // eslint-disable-next-line react/prop-types
   const { source, selector } = props;
-  const dates = source && Object.keys(source).sort();
-  const values = dates && dates.map((x) => selector(source[x]));
-  const min = values && values.reduce((a, b) => Math.min(a, b));
-  const max = values && (values.reduce((a, b) => Math.max(a, b)) - min) / 200;
+  const dates = source && source.map((x) => x.date);
+  const values = dates && source.map(selector);
+  const min = values && values.reduce((a, b) => Math.min(a, b), values[0]);
+  const max = values && (values.reduce((a, b) => Math.max(a, b), values[0]) - min) / 200;
   // eslint-disable-next-line no-nested-ternary
   return (
     <svg
@@ -58,3 +59,8 @@ export default function Chart(props) {
     </svg>
   );
 }
+
+Chart.propTypes = {
+  // eslint-disable-next-line react/forbid-prop-types
+  source: PropTypes.array.isRequired,
+};
