@@ -1,6 +1,6 @@
 # Metrics web app
 
-mobile web application to check a list of narrativa API COVID-19 metrics.
+mobile web application to check a list of World Bank API development metrics.
 
 ### Setup
 
