@@ -116,6 +116,11 @@ ul li:nth-child(4n-2) {
   right: 10%;
 }
 
+.total > .val > * {
+  width: 200px;
+  height: 41px;
+}
+
 .banner .prev {
   position: absolute;
   bottom: 20px;
