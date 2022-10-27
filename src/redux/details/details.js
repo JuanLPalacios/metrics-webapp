@@ -15,14 +15,12 @@ export default function reducer(state = defaultCountry, action = {}) {
   }
 }
 
-export const getDetails = (country, date) => (dispatch) => {
+export const getDetails = (country, indicatorId) => (dispatch) => {
   dispatch({ type: GET });
-  const from = new Date(Math.min(new Date().getTime() - 2592000000, date.getTime() - 1296000000));
-  const to = new Date(from.getTime() + 2592000000);
-  return fetch(`https://api.covid19tracking.narrativa.com/api/country/${country}?date_from=${from.toISOString().substring(0, 10)}&date_to=${to.toISOString().substring(0, 10)}`).then(
-    (request) => request.json().then((data) => dispatch({
+  return fetch(`https://api.worldbank.org/v2/country/${country}/indicator/${indicatorId}?per_page=300&format=json`).then(
+    (request) => request.json().then(([, data]) => dispatch({
       type: GET_SUCCESS,
-      data,
+      data: data.reverse(),
     })),
     (err) => dispatch({ type: GET_FAILURE, err }),
   );

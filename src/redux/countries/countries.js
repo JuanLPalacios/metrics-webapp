@@ -3,24 +3,7 @@ const LIST_SUCCESS = 'metrics-webapp/countries/LIST_SUCCESS';
 const LIST_FAILURE = 'metrics-webapp/countries/LIST_FAILURE';
 const defaultCountries = {
   countries: [],
-  total: {
-    today_confirmed: 0,
-    today_deaths: 0,
-    today_new_confirmed: 0,
-    today_new_deaths: 0,
-    today_new_open_cases: 0,
-    today_new_recovered: 0,
-    today_open_cases: 0,
-    today_recovered: 0,
-    today_vs_yesterday_confirmed: 0,
-    today_vs_yesterday_deaths: 0,
-    today_vs_yesterday_open_cases: 0,
-    today_vs_yesterday_recovered: 0,
-    yesterday_confirmed: 0,
-    yesterday_deaths: 0,
-    yesterday_open_cases: 0,
-    yesterday_recovered: 0,
-  },
+  total: 0,
 };
 export default function reducer(state = defaultCountries, action = {}) {
   switch (action.type) {
@@ -32,15 +15,15 @@ export default function reducer(state = defaultCountries, action = {}) {
   }
 }
 
-export const getCountries = (date = new Date()) => (dispatch) => {
-  const day = date.toISOString().substring(0, 10);
+export const getCountries = (date = new Date(), indicatorId) => (dispatch) => {
+  const year = date.toISOString().substring(0, 4);
   dispatch({ type: LIST });
-  return fetch(`https://api.covid19tracking.narrativa.com/api/${day}`).then(
-    (request) => request.json().then((list) => dispatch({
+  return fetch(`https://api.worldbank.org/v2/country/all/indicator/${indicatorId}?date=${year}&per_page=300&format=json`).then(
+    (request) => request.json().then(([, list]) => dispatch({
       type: LIST_SUCCESS,
       val: list.error ? defaultCountries : {
-        countries: Object.values(list.dates[day].countries),
-        total: list.total,
+        countries: list.slice(49),
+        total: list[48].value,
       },
     })),
     (err) => dispatch({ type: LIST_FAILURE, err }),

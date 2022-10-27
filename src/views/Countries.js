@@ -2,7 +2,9 @@ import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { getCountries } from '../redux/countries/countries';
-import { setDate, setValue, VALUE_LIST } from '../redux/filter/filter';
+import {
+  setDate, setValue, VALUE_LIST, VALUE_MAP,
+} from '../redux/filter/filter';
 import format from '../utils/format';
 
 export default function Countries() {
@@ -13,9 +15,9 @@ export default function Countries() {
   const dispatch = useDispatch();
   useEffect(
     () => {
-      dispatch(getCountries(date));
+      dispatch(getCountries(date, value));
     },
-    [date],
+    [date, value],
   );
   const prevYear = new Date(new Date().setFullYear(date.getFullYear() - 1));
   const nextYear = new Date(new Date().setFullYear(date.getFullYear() + 1));
@@ -64,13 +66,13 @@ export default function Countries() {
         </time>
         <div className="total">
           <div className="val">
-            <button type="button" onClick={() => dispatch(setValue(prevValue))}>{prevValue.replace(/_/g, ' ')}</button>
+            <button type="button" onClick={() => dispatch(setValue(prevValue))}>{VALUE_MAP[prevValue]}</button>
             <span>
-              {value.replace(/_/g, ' ')}
+              {VALUE_MAP[value]}
             </span>
-            <button type="button" onClick={() => dispatch(setValue(nextValue))}>{nextValue.replace(/_/g, ' ')}</button>
+            <button type="button" onClick={() => dispatch(setValue(nextValue))}>{VALUE_MAP[nextValue]}</button>
           </div>
-          {format(total[value])}
+          {format(total)}
         </div>
         <button className="next" type="button" onClick={() => dispatch(setDate(nextDay))}>
           <img src="./images/right-arrow.svg" alt="" />
@@ -82,14 +84,14 @@ export default function Countries() {
       <ul>
         {countries.map((country) => (
           <li key={country.id}>
-            <Link className="country card" to={`details/${country.id}`}>
+            <Link className="country card" to={`details/${country.country.id}`}>
               <img src={`images/countries/${country.id}-EPS-01-0001.png`} alt="" />
               <div>
                 <h3>
-                  {country.name}
+                  {country.country.value}
                 </h3>
                 <div className="value">
-                  {country[value]}
+                  {format(country.value)}
                 </div>
               </div>
             </Link>
